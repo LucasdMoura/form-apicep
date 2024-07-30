@@ -10,8 +10,8 @@ Este projeto é um simples formulário de contato criado com Next.js para uma in
 **Pré-requisitos:**
 * Node.js (v16 ou superior) e npm (ou yarn) instalados
 * Um editor de código (Visual Studio Code recomendado)
-
-**Como Executar o Projeto:**
+---
+## 🛣️ Como executar o projeto
 ```bash
 npm run dev
 # ou
