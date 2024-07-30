@@ -7,7 +7,7 @@ export default function Footer({children}) {
         <div className="">
           <h2>Desenvolvido por Lucas de Moura</h2>
           <div className='flex justify-center space-x-5 mt-2'>
-          <a href="https://linkedin.com/in/lucasdmourasantos/" target="_blank">
+          <a href="https://linkedin.com/in/lucasdmourasantos/" target="_blank" alt='Link para o meu linkedin' title='Link para o meu Linkedin'>
             <Image 
               src="/linkedin.png" 
               alt="Logo" 
@@ -15,7 +15,7 @@ export default function Footer({children}) {
               height= {30}
               className="bg-white"
             /></a>
-            <a href="https://github.com/LucasdMoura" target="_blank">
+            <a href="https://github.com/LucasdMoura" target="_blank" alt='Link para o meu Github' title='Link para o meu Github'>
             <Image 
               src="/github.png" 
               alt="Logo" 

@@ -16,7 +16,6 @@ export default function Form() {
   }, []);
 
   const onSubmit = (formData) => {
-    // Verificar se o nome ou e-mail já estão cadastrados
     const isNameExist = data.some(item => item.name.toLowerCase() === formData.name.toLowerCase());
     const isEmailExist = data.some(item => item.email.toLowerCase() === formData.email.toLowerCase());
 
@@ -88,18 +87,18 @@ export default function Form() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-base font-semibold leading-7 text-slate-400">Formulário de Cadastro</h2>
         <p className="mt-1 text-sm leading-6 text-slate-300">Preencha com suas informações pessoais.</p>
-        
+        <p className="text-sm text-red-400">Os campos obrigatórios estão indicados com *.</p>
         <div className="gap-4">  
           <div className='grid space-x-4 grid-cols-2'>
             <div>
-              <label htmlFor="name" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Nome</label>
+              <label htmlFor="name" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Nome*</label>
               <input id="name" {...register("name", { required: true })} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.name && <span className="text-red-500">{errors.name.message || "Este campo é obrigatório"}</span>}
             </div>
 
             <div>
-              <label htmlFor="email" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">E-mail</label>
+              <label htmlFor="email" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">E-mail*</label>
               <input id="email" {...register("email", { 
                 required: true,
                 pattern: {
@@ -114,14 +113,14 @@ export default function Form() {
 
           <div className='grid space-x-4 grid-cols-2'>
             <div>
-              <label htmlFor="cep" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cep</label>
+              <label htmlFor="cep" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cep*</label>
               <input id="cep" {...register("cep", { required: true })} onBlur={handleCepBlur} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.cep && <span className="text-red-500">{errors.cep.message || "Este campo é obrigatório"}</span>}
             </div>
 
             <div>
-              <label htmlFor="adress" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Endereço</label>
+              <label htmlFor="adress" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Endereço*</label>
               <input id="adress" {...register("adress", { required: true })} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.adress && <span className="text-red-500">Este campo é obrigatório</span>}
@@ -130,7 +129,7 @@ export default function Form() {
           
           <div className='grid space-x-4 grid-cols-2'>
             <div>
-              <label htmlFor="addressNumber" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Número</label>
+              <label htmlFor="addressNumber" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Número*</label>
               <input id="addressNumber" {...register("addressNumber", { required: true })} 
               type="number"
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -146,21 +145,21 @@ export default function Form() {
 
           <div className="flex space-x-4">
             <div className="flex-1">
-              <label htmlFor="neighborhood" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Bairro</label>
+              <label htmlFor="neighborhood" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Bairro*</label>
               <input id="neighborhood" {...register("neighborhood", { required: true })} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.neighborhood && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
 
             <div className="flex-1">
-              <label htmlFor="city" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cidade</label>
+              <label htmlFor="city" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cidade*</label>
               <input id="city" {...register("city", { required: true })} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.city && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
 
             <div className="flex-1">
-              <label htmlFor="region" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Estado</label>
+              <label htmlFor="region" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Estado*</label>
               <input id="region" {...register("region", { required: true })} 
               className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.region && <span className="text-red-500">Este campo é obrigatório</span>}

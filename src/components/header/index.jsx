@@ -6,7 +6,8 @@ export default function Header({children}) {
             <header className="bg-blue-950 text-white w-full flex items-center h-24 space-x-10 ">
             <Image 
             src="/logo.png" 
-            alt="Logo" 
+            alt="Logo"
+            title='Logo'
             width= {50} 
             height= {50}
             className="ml-40"
