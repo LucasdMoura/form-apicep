@@ -36,6 +36,8 @@ bun dev
 
 ## 📄 Formulário e Validação:
 <p>O formulário utiliza o componente `Form` do Next.js e a biblioteca react-hook-form para validação. A validação é realizada ao clicar em enviar, e mensagens de erro são exibidas abaixo dos campos para o usuário.</p>
+<p>Após o usuário clicar em enviar os dados são salvos no localStorage<p>
+<p>Os dados armazenados são armazenados somente no localStorage, ou seja somente no navegador do usuário, caso queira limpar os dados apresentados na tabela basta pressionar a tecla f12, na aba "aplicativo", no menu lateral esquerdo selecionar "Armazenamento local", depois em "http://localhost:3000" e após clicar no topo em 🚫 ('remover tudo'), recarregue a página e a tabela torna a ficar em branco.</p>
 
 ---
 
