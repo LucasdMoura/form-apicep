@@ -4,6 +4,12 @@
 > Status do Projeto: Concluido :heavy_check_mark:
 
 ---
+
+## Deploy
+
+Este projeto está atualmente implantado em Vercel. Você pode acessá-lo [aqui](https://form-apicep.vercel.app/).
+
+---
 ## 🛠 Tecnologias
 * <img alt="Next.JS" title="Next.JS" height= "20" src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
 * <img alt="Tailwind" title="Tailwind CSS" height= "20" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
