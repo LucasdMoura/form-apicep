@@ -16,8 +16,13 @@ export default function Form() {
   }, []);
 
   const onSubmit = (formData) => {
-    const isNameExist = data.some(item => item.name.toLowerCase() === formData.name.toLowerCase());
-    const isEmailExist = data.some(item => item.email.toLowerCase() === formData.email.toLowerCase());
+    // Trim whitespace from all input values
+    const trimmedData = Object.fromEntries(
+      Object.entries(formData).map(([key, value]) => [key, value.trim()])
+    );
+
+    const isNameExist = data.some(item => item.name.toLowerCase() === trimmedData.name.toLowerCase());
+    const isEmailExist = data.some(item => item.email.toLowerCase() === trimmedData.email.toLowerCase());
 
     if (isNameExist) {
       setError("name", { type: "manual", message: "Este nome já está cadastrado" });
@@ -29,7 +34,7 @@ export default function Form() {
       return;
     }
 
-    const updatedData = [...data, formData];
+    const updatedData = [...data, trimmedData];
     setData(updatedData);
     setFilteredData(updatedData);
     localStorage.setItem("formData", JSON.stringify(updatedData));
@@ -83,17 +88,18 @@ export default function Form() {
   };
 
   return (
-    <div className='px-40'>
+    <div className='px-4 md:px-10 lg:px-20 xl:px-40'>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-base font-semibold leading-7 text-slate-400">Formulário de Cadastro</h2>
         <p className="mt-1 text-sm leading-6 text-slate-300">Preencha com suas informações pessoais.</p>
         <p className="text-sm text-red-400">Os campos obrigatórios estão indicados com *.</p>
         <div className="gap-4">  
-          <div className='grid space-x-4 grid-cols-2'>
+          <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2'>
             <div>
               <label htmlFor="name" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Nome*</label>
               <input id="name" {...register("name", { required: true })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('name', e.target.value.trim())} />
               {errors.name && <span className="text-red-500">{errors.name.message || "Este campo é obrigatório"}</span>}
             </div>
 
@@ -106,73 +112,81 @@ export default function Form() {
                   message: "Formato de e-mail inválido"
                 }
               })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('email', e.target.value.trim())} />
               {errors.email && <span className="text-red-500">{errors.email.message || "Este campo é obrigatório"}</span>}
             </div>
           </div>
 
-          <div className='grid space-x-4 grid-cols-2'>
+          <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2'>
             <div>
               <label htmlFor="cep" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cep*</label>
               <input id="cep" {...register("cep", { required: true })} onBlur={handleCepBlur} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('cep', e.target.value.trim())} />
               {errors.cep && <span className="text-red-500">{errors.cep.message || "Este campo é obrigatório"}</span>}
             </div>
 
             <div>
               <label htmlFor="adress" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Endereço*</label>
               <input id="adress" {...register("adress", { required: true })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('adress', e.target.value.trim())} />
               {errors.adress && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
           </div>
           
-          <div className='grid space-x-4 grid-cols-2'>
+          <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2'>
             <div>
               <label htmlFor="addressNumber" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Número*</label>
               <input id="addressNumber" {...register("addressNumber", { required: true })} 
               type="number"
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('addressNumber', e.target.value.trim())} />
               {errors.addressNumber && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
 
             <div>
               <label htmlFor="complement" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Complemento</label>
               <input id="complement" {...register("complement")} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('complement', e.target.value.trim())} />
             </div>
           </div>
 
-          <div className="flex space-x-4">
-            <div className="flex-1">
+          <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2'>
+            <div>
               <label htmlFor="neighborhood" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Bairro*</label>
               <input id="neighborhood" {...register("neighborhood", { required: true })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('neighborhood', e.target.value.trim())} />
               {errors.neighborhood && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
 
-            <div className="flex-1">
+            <div>
               <label htmlFor="city" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cidade*</label>
               <input id="city" {...register("city", { required: true })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('city', e.target.value.trim())} />
               {errors.city && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
 
-            <div className="flex-1">
+            <div>
               <label htmlFor="region" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Estado*</label>
               <input id="region" {...register("region", { required: true })} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onBlur={(e) => setValue('region', e.target.value.trim())} />
               {errors.region && <span className="text-red-500">Este campo é obrigatório</span>}
             </div>
           </div>
         </div>
-
-        <div className="mt-6 flex items-center justify-start gap-x-6 px-50"> 
+        
+        <div className="mt-6 flex items-center justify-start gap-x-6"> 
           <button 
             type="button"
             onClick={handleCancel} 
             className="text-sm font-semibold leading-6 text-slate-400">Limpar</button>
-          <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded">Submit</button>
+          <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded">Enviar</button>
         </div>
       </form>
     
@@ -185,13 +199,13 @@ export default function Form() {
           className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-5"
         />
 
-        <div className="rounded-lg border border-gray-400 overflow-hidden"> 
+        <div className="rounded-lg border border-gray-400 overflow-x-auto"> 
             <table className="w-full border-collapse mb-0">
             <thead>
                 <tr>
                 <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">Nome</th>
                 <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">E-mail</th>
-                <th className="border bg-slate-100  border-gray-400 text-black px-4 py-2">Cep</th>
+                <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">Cep</th>
                 <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">Endereço</th>
                 <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">Número</th>
                 <th className="border bg-slate-100 border-gray-400 text-black px-4 py-2">Complemento</th>
@@ -216,9 +230,7 @@ export default function Form() {
                 ))}
             </tbody>
             </table>
-            
         </div>
-        <br/>
       </div>
     </div>
   );
