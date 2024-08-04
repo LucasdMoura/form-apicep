@@ -118,12 +118,11 @@ export default function Form() {
             </div>
           </div>
 
-          <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2'>
+          <div className='grid space-x-4 grid-cols-2'>
             <div>
               <label htmlFor="cep" className="block mb-2 mt-4 text-sm font-medium leading-4 text-slate-400">Cep*</label>
               <input id="cep" {...register("cep", { required: true })} onBlur={handleCepBlur} 
-              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              onBlur={(e) => setValue('cep', e.target.value.trim())} />
+              className="block w-full rounded-md px-4 border-0 py-1.5 text-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               {errors.cep && <span className="text-red-500">{errors.cep.message || "Este campo é obrigatório"}</span>}
             </div>
 
