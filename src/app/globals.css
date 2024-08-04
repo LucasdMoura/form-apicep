@@ -16,13 +16,6 @@
   }
 }
 
-header {
-  display: flex;
-  align-items: center;
-  height: 100px;
-  margin-bottom: 50px;
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
