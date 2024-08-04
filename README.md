@@ -4,6 +4,12 @@
 > Status do Projeto: Concluido :heavy_check_mark:
 
 ---
+
+## Deploy
+
+Este projeto está atualmente implantado em Vercel. Você pode acessá-lo [aqui](https://form-apicep.vercel.app/).
+
+---
 ## 🛠 Tecnologias
 * <img alt="Next.JS" title="Next.JS" height= "20" src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
 * <img alt="Tailwind" title="Tailwind CSS" height= "20" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
@@ -36,6 +42,8 @@ bun dev
 
 ## 📄 Formulário e Validação:
 <p>O formulário utiliza o componente `Form` do Next.js e a biblioteca react-hook-form para validação. A validação é realizada ao clicar em enviar, e mensagens de erro são exibidas abaixo dos campos para o usuário.</p>
+<p>Após o usuário clicar em enviar os dados são salvos no localStorage.<p>
+<p>Os dados armazenados são armazenados somente no localStorage, ou seja somente no navegador do usuário, caso queira limpar os dados apresentados na tabela basta pressionar a tecla f12, na aba "aplicativo", no menu lateral esquerdo selecionar "Armazenamento local", depois em "http://localhost:3000" e após clicar no topo em 🚫 ('remover tudo'), recarregue a página e a tabela torna a ficar em branco.</p>
 
 ---
 
